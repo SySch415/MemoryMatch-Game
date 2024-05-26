@@ -10,7 +10,7 @@ public class Game {
     //Read from city file into array and shuffle
     public String[] readIntoArray() throws FileNotFoundException {
 
-        File myFile = new File("/Users/sy/Desktop/java_projects/memory_match/MemoryMatch_American-Cities.txt");
+        File myFile = new File("/Users/sy/dev/java_projects/memory_match/MemoryMatch_American-Cities.txt");
 
         String[] wordArray1 = new String[50];
 

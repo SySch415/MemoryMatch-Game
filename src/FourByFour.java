@@ -150,7 +150,7 @@ public class FourByFour extends Grid {
 
             //Catch if user picks same square twice
             if (row2 == row && col2 == col) {
-                System.out.println("Can't do that! Try again fucker!");
+                System.out.println("You have already selected this square. Try Again!");
                 System.out.println("Your choice of " + themeArray[row][col] + " on row " + (row + 1) + " column " + (col + 1) + " has been refreshed");
                 themeArray[row][col] = "City";
                 System.out.println();

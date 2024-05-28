@@ -13,13 +13,15 @@ public class GameGui extends JFrame {
 
     private JButton firstButtonClick = null;
     private String firstCityname = null;
-    private int clickCounter = 0, gridSize, matchCount = 0;
+    private int clickCounter = 0, gridSize, matchCount = 0, intervalVal;
     private String[] cities;
     private JLabel messageBox = new JLabel();
     private JButton[] buttons;
     private Boolean[] buttonState;
+    private Boolean gridSizeSelected;
+    private Boolean intervalSelected;
 
-    private enum STATE{
+    private enum STATE {
         MENU, GAME
     };
     private STATE state = STATE.MENU;
@@ -51,6 +53,10 @@ public class GameGui extends JFrame {
 
         // prevent resize of gui
         setResizable(false);
+
+        // initialize menu flags to false
+        gridSizeSelected = false;
+        intervalSelected = false;
     }
 
     private void addGuiComponents(int gridSize) throws FileNotFoundException {
@@ -119,7 +125,7 @@ public class GameGui extends JFrame {
             fourByFourButton.setText("Select");
             // set cursor to hand cursor when hovering over button
             fourByFourButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            fourByFourButton.setActionCommand("Four");
+            fourByFourButton.setActionCommand("Grid Size Four");
             fourByFourButton.addActionListener(new MenuButtonClickListener());
             add(fourByFourButton);
 
@@ -138,7 +144,7 @@ public class GameGui extends JFrame {
 
             // set cursor to hand cursor when hovering over button
             sixBySixButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            sixBySixButton.setActionCommand("Six");
+            sixBySixButton.setActionCommand("Grid Size Six");
             sixBySixButton.addActionListener(new MenuButtonClickListener());
             add(sixBySixButton);
 
@@ -157,7 +163,7 @@ public class GameGui extends JFrame {
 
             // set cursor to hand cursor when hovering over button
             eightByEightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            eightByEightButton.setActionCommand("Eight");
+            eightByEightButton.setActionCommand("Grid Size Eight");
             eightByEightButton.addActionListener(new MenuButtonClickListener());
             add(eightByEightButton);
 
@@ -176,7 +182,7 @@ public class GameGui extends JFrame {
 
             // set cursor to hand cursor; set action command and listener
             sixSecButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            sixSecButton.setActionCommand("Six");                                  //TODO: CHANGE ACTION COMMAND
+            sixSecButton.setActionCommand("Interval Six");
             sixSecButton.addActionListener(new MenuButtonClickListener());
             add(sixSecButton);
 
@@ -195,7 +201,7 @@ public class GameGui extends JFrame {
 
             // set cursor to hand cursor; set action command and listener
             fourSecButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            fourSecButton.setActionCommand("Four");                                   //TODO: CHANGE ACTION COMMAND
+            fourSecButton.setActionCommand("Interval Four");
             fourSecButton.addActionListener(new MenuButtonClickListener());
             add(fourSecButton);
 
@@ -213,54 +219,59 @@ public class GameGui extends JFrame {
 
             // set cursor to hand cursor; set action command and listener
             twoSecButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            twoSecButton.setActionCommand("Two");                                  //TODO: CHANGE ACTION COMMAND
+            twoSecButton.setActionCommand("Interval Two");
             twoSecButton.addActionListener(new MenuButtonClickListener());
             add(twoSecButton);
 
-            //TODO: ADD LOGIC FOR INTERVAL BUTTONS
         }
     }
 
     private class MenuButtonClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JButton clickedGridSizeButton = (JButton) e.getSource();
-            String gridSelection = clickedGridSizeButton.getActionCommand();
+            JButton clickedMenuButton = (JButton) e.getSource();
+            String menuCommand = clickedMenuButton.getActionCommand();
 
-            if (Objects.equals(gridSelection, "Four")) {
-                gridSize = 4;
-                clickedGridSizeButton.setEnabled(false);
-                
+            // switch case to listen for buttons selected
+            switch (menuCommand) {
+                case "Grid Size Four":
+                    gridSize = 4;
+                    gridSizeSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+                case "Grid Size Six":
+                    gridSize = 6;
+                    gridSizeSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+                case "Grid Size Eight":
+                    gridSize = 8;
+                    gridSizeSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+                case "Interval Six":
+                    intervalVal = 6000;
+                    intervalSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+                case "Interval Four":
+                    intervalVal = 4000;
+                    intervalSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+                case "Interval Two":
+                    intervalVal = 2000;
+                    intervalSelected = true;
+                    clickedMenuButton.setEnabled(false);
+                    break;
+            }
+
+            // if menu options have been selected, start game
+            if (gridSizeSelected && intervalSelected) {
+
+                clickedMenuButton.setEnabled(false);
+
                 removeMenuCompenents();
-                state = STATE.GAME;
-
-                // add grid component and start game
-                try {
-                    addGuiComponents(gridSize);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-            } else if (Objects.equals(gridSelection, "Six")) {
-                gridSize = 6;
-                clickedGridSizeButton.setEnabled(false);
-                removeMenuCompenents();
-                // change to game state
-                state = STATE.GAME;
-
-                // add grid component and start game
-                try {
-                    addGuiComponents(gridSize);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-            } else if (Objects.equals(gridSelection, "Eight")) {
-                gridSize = 8;
-                clickedGridSizeButton.setEnabled(false);
-                removeMenuCompenents();
-
-                //change to game state
                 state = STATE.GAME;
 
                 // add grid component and start game
@@ -270,6 +281,7 @@ public class GameGui extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
+
             // revalidate and repaint components
             revalidate();
             repaint();
@@ -331,7 +343,7 @@ public class GameGui extends JFrame {
                         b.setEnabled(false);
                     }
 
-                    Timer timer = new Timer(2000, evt -> {
+                    Timer timer = new Timer(intervalVal, evt -> {
 
                         // enable all buttons that are not matched
                         for (int i = 0; i < gridSize * gridSize; i++) {
@@ -363,7 +375,7 @@ public class GameGui extends JFrame {
     // will be randomized to load into grid buttons
     private String[] readIntoArray() throws FileNotFoundException {
 
-        File myFile = new File("/Users/sy/dev/java_projects/memory_match/MemoryMatch_American-Cities.txt");
+        File myFile = new File("/Users/sy/dev/java-projects/memory_match/MemoryMatch_American-Cities.txt");
 
         String[] wordArray1 = new String[gridSize * gridSize];
 

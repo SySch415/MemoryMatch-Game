@@ -21,6 +21,7 @@ public class GameGui extends JFrame {
     private Boolean gridSizeSelected;
     private Boolean intervalSelected;
 
+    // enum for game state
     private enum STATE {
         MENU, GAME
     };
@@ -32,8 +33,10 @@ public class GameGui extends JFrame {
     private JLabel sixSecond, fourSecond, twoSecond;
     private JButton sixSecButton, fourSecButton, twoSecButton;
 
+    // window and game components configuration
     public GameGui() throws FileNotFoundException {
-        // set title
+
+      // set title
         super("Memory Match");
 
         // configure gui to end the programs process once its closed

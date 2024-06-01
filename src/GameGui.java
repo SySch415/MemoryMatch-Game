@@ -42,6 +42,12 @@ public class GameGui extends JFrame {
         // configure gui to end the programs process once its closed
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        // create instance of background panel with path to background image
+        BackGround backGroundPanel = new BackGround("/Users/sy/dev/java-projects/memory_match/background_images/395ca321896005.563094018c06e-2.jpg");
+
+        // set the background panel as the content pane
+        setContentPane(backGroundPanel);
+
         // layout manager set to gridSize chosen by player
         setLayout(null);
 
@@ -79,7 +85,7 @@ public class GameGui extends JFrame {
 
             // create grid panel object and set bounds of panel
             JPanel grid = new JPanel(new GridLayout(gridSize, gridSize));
-            grid.setBounds(30, 30, 600, 600);
+            grid.setBounds(100, 50, 600, 600);
 
             // Initialize buttons and add to grid panel
             for (int i = 0; i < gridSize * gridSize; i++) {
@@ -102,8 +108,10 @@ public class GameGui extends JFrame {
             }
             add(grid);
 
-            messageBox.setBounds(30, 650, 450, 36);
+            // set message box; throws match/no match info
+            messageBox.setBounds(30, 660, 450, 36);
             messageBox.setFont(new Font("Dialog", Font.PLAIN, 24));
+            messageBox.setForeground(Color.WHITE);
             add(messageBox);
 
             // program state is MENU, load up menu components
@@ -111,19 +119,21 @@ public class GameGui extends JFrame {
             menuTitle = new JLabel();
             menuTitle.setBounds(200,10,450,50);
             menuTitle.setFont(new Font("Dialog", Font.BOLD, 50));
+            menuTitle.setForeground(Color.WHITE);
             menuTitle.setText("Memory Match");
             add(menuTitle);
 
             //grid size menu selection button for 4x4 grid
             fourGrid = new JLabel();
-            fourGrid.setBounds(100, 200, 200, 36);
+            fourGrid.setBounds(250, 200, 200, 36);
             fourGrid.setFont(new Font("Dialog", Font.PLAIN, 24));
+            fourGrid.setForeground(Color.WHITE);
             fourGrid.setText("4 x 4 Grid:");
             add(fourGrid);
 
             // select button for 4x4 grid
             fourByFourButton = new JButton();
-            fourByFourButton.setBounds(250, 200, 100, 36);
+            fourByFourButton.setBounds(400, 200, 100, 36);
             fourByFourButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             fourByFourButton.setText("Select");
             // set cursor to hand cursor when hovering over button
@@ -134,14 +144,15 @@ public class GameGui extends JFrame {
 
             //grid size menu selection button for 4x4 grid
             sixGrid = new JLabel();
-            sixGrid.setBounds(100, 250, 200, 36);
+            sixGrid.setBounds(250, 250, 200, 36);
             sixGrid.setFont(new Font("Dialog", Font.PLAIN, 24));
+            sixGrid.setForeground(Color.WHITE);
             sixGrid.setText("6 x 6 Grid:");
             add(sixGrid);
 
             // select button for 6x6 grid
             sixBySixButton = new JButton();
-            sixBySixButton.setBounds(250, 250, 100, 36);
+            sixBySixButton.setBounds(400, 250, 100, 36);
             sixBySixButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             sixBySixButton.setText("Select");
 
@@ -153,14 +164,15 @@ public class GameGui extends JFrame {
 
             //grid size menu selection button for 8x8 grid
             eightGrid = new JLabel();
-            eightGrid.setBounds(100, 300, 200, 36);
+            eightGrid.setBounds(250, 300, 200, 36);
             eightGrid.setFont(new Font("Dialog", Font.PLAIN, 24));
+            eightGrid.setForeground(Color.WHITE);
             eightGrid.setText("8 x 8 Grid:");
             add(eightGrid);
 
             // select button for 8x8 grid
             eightByEightButton = new JButton();
-            eightByEightButton.setBounds(250, 300, 100, 36);
+            eightByEightButton.setBounds(400, 300, 100, 36);
             eightByEightButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             eightByEightButton.setText("Select");
 
@@ -172,14 +184,15 @@ public class GameGui extends JFrame {
 
             // option for 6 second interval
             sixSecond = new JLabel();
-            sixSecond.setBounds(100, 400, 200, 36);
+            sixSecond.setBounds(250, 400, 200, 36);
             sixSecond.setFont(new Font("Dialog", Font.PLAIN, 24));
+            sixSecond.setForeground(Color.WHITE);
             sixSecond.setText("6 Seconds: ");
             add(sixSecond);
 
             // button for six second interval
             sixSecButton = new JButton();
-            sixSecButton.setBounds(250, 400, 100, 36);
+            sixSecButton.setBounds(400, 400, 100, 36);
             sixSecButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             sixSecButton.setText("Select");
 
@@ -191,14 +204,15 @@ public class GameGui extends JFrame {
 
             // option for four second interval
             fourSecond = new JLabel();
-            fourSecond.setBounds(100, 450, 200, 36);
+            fourSecond.setBounds(250, 450, 200, 36);
             fourSecond.setFont(new Font("Dialog", Font.PLAIN, 24));
+            fourSecond.setForeground(Color.WHITE);
             fourSecond.setText("4 Seconds: ");
             add(fourSecond);
 
             // button for four second interval
             fourSecButton = new JButton();
-            fourSecButton.setBounds(250, 450, 100, 36);
+            fourSecButton.setBounds(400, 450, 100, 36);
             fourSecButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             fourSecButton.setText("Select");
 
@@ -209,14 +223,15 @@ public class GameGui extends JFrame {
             add(fourSecButton);
 
             twoSecond = new JLabel();
-            twoSecond.setBounds(100, 500, 200, 36);
+            twoSecond.setBounds(250, 500, 200, 36);
             twoSecond.setFont(new Font("Dialog", Font.PLAIN, 24));
+            twoSecond.setForeground(Color.WHITE);
             twoSecond.setText("2 Seconds: ");
             add(twoSecond);
 
             // button for six second interval
             twoSecButton = new JButton();
-            twoSecButton.setBounds(250, 500, 100, 36);
+            twoSecButton.setBounds(400, 500, 100, 36);
             twoSecButton.setFont(new Font("Dialog", Font.PLAIN, 24));
             twoSecButton.setText("Select");
 

@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class BackGround extends JPanel {
 
-    private Image backgroundImage;
+    private final Image backgroundImage;
 
     public BackGround(String fileName) {
         // load background image

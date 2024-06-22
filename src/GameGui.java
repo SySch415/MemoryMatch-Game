@@ -38,6 +38,7 @@ public class GameGui extends JFrame {
       // set title
         super("Memory Match");
 
+
         // configure gui to end the programs process once its closed
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
